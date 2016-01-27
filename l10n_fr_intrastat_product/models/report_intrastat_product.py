@@ -277,7 +277,11 @@ class report_intrastat_product(orm.Model):
                         source_uom, line_qty, dest_uom_kg, context=context)
                 elif source_uom.category_id.id == pce_uom_categ_id:
                     if not line.product_id.weight_net:
-                        raise orm.except_orm(_('Error :'), _("Missing net weight on product '%s'.") % (line.product_id.name))
+                        raise orm.except_orm(_('Error :'), _(
+                            "Missing net weight for the following product:"
+                            "\n\n default code : %'"
+                            "\n name : %s.") % (
+                                line.product_id.default_code, line.product_id.name))
                     if source_uom.id == pce_uom_id:
                         weight_to_write = line.product_id.weight_net * line_qty
                     else:
@@ -335,8 +339,8 @@ class report_intrastat_product(orm.Model):
                             ], context=context)
                         if not supplier_ids:
                             raise orm.except_orm(_('Error :'),
-                                _("Missing country of origin on product '%s' or on it's supplier information for partner '%s'.")
-                                % (line.product_id.name, parent_values.get('origin_partner_name', 'none')))
+                                _("Missing country of origin on product '%s' - '%s' or on it's supplier information for partner '%s'.")
+                                % (line.product_id.default_code, line.product_id.name, parent_values.get('origin_partner_name', 'none')))
                         else:
                             product_country_origin_id_to_write = supplieri_obj.read(cr, uid,
                                 supplier_ids[0], ['origin_country_id'],
