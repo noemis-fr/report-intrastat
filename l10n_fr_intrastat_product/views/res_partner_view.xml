@@ -21,6 +21,16 @@
     </field>
 </record>
 
+<record id="view_res_partner_search" model="ir.ui.view">
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter"/>
+    <field name="arch" type="xml">
+        <filter name="supplier" position="after">
+           <filter string="Without Country" name="without_country" domain="[('country_id','=', False)]"/>
+        </filter>
+    </field>
+</record>
+
 <record id="view_res_partner_intrastat_tree" model="ir.ui.view">
     <field name="model">res.partner</field>
     <field name="arch" type="xml">
@@ -28,8 +38,11 @@
             <field name="name" readonly="1"/>
             <field name="customer" readonly="1"/>
             <field name="supplier" readonly="1"/>
-            <field name="intrastat_fiscal_representative" />
+            <field name="vat"/>
+            <field name="zip"/>
+            <field name="city"/>
             <field name="country_id" required="1"/>
+            <field name="intrastat_fiscal_representative"/>
             <field name="company_id" groups="base.group_multi_company"/>
         </tree>
     </field>
