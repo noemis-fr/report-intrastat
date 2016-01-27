@@ -11,6 +11,18 @@
 <!-- Menu entry for Intrastat Reporting -->
 <menuitem id="menu_intrastat_reporting_root" name="Intrastat reporting" parent="account.menu_finance_legal_statement" />
 
+<!-- Menu entry for Intrastat Settings -->
+<menuitem id="menu_intrastat_setting_root" name="Intrastat Settings" parent="account.menu_finance" sequence="3"/>
+
+<menuitem id="menu_product_product_instrastat"
+    name="Products (Intrastat)"
+    parent="menu_intrastat_setting_root" sequence="10"
+    action="action_product_product_intrastat"/>
+
+<menuitem id="menu_account_tax_instrastat"
+    name="Taxes (Intrastat)"
+    parent="menu_intrastat_setting_root" sequence="50"
+    action="action_account_tax_intrastat"/>
 
 </data>
 </openerp>
