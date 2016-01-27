@@ -151,7 +151,7 @@
 
 
 <!-- Intrastat product menu -->
-<menuitem id="fr_intrastat_product_menu" parent="intrastat_base.menu_intrastat_base_root" action="fr_intrastat_product_tree_action" />
+<menuitem id="fr_intrastat_product_menu" parent="intrastat_base.menu_intrastat_reporting_root" action="fr_intrastat_product_tree_action" />
 
 
 <!-- Notification in the chatter -->

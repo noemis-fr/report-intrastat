@@ -8,8 +8,8 @@
 <openerp>
 <data>
 
-<!-- Menu entry for Intrastat -->
-<menuitem id="menu_intrastat_base_root" name="Intrastat reporting" parent="account.menu_finance_legal_statement" />
+<!-- Menu entry for Intrastat Reporting -->
+<menuitem id="menu_intrastat_reporting_root" name="Intrastat reporting" parent="account.menu_finance_legal_statement" />
 
 
 </data>

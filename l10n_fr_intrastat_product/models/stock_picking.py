@@ -23,29 +23,6 @@
 from openerp.osv import orm, fields
 
 
-class stock_location(orm.Model):
-    _inherit = "stock.location"
-    _columns = {
-        'intrastat_department': fields.char(
-            'Department', size=2,
-            help="France's department where the stock location is located. "
-            "This parameter is required for the DEB "
-            "(Déclaration d'Echange de Biens)."),
-    }
-
-    def _check_intrastat_department(self, cr, uid, ids):
-        dpt_list = []
-        for dpt_to_check in self.read(cr, uid, ids, ['intrastat_department']):
-            dpt_list.append(dpt_to_check['intrastat_department'])
-        return self.pool.get('res.company').real_department_check(dpt_list)
-
-    _constraints = [(
-        _check_intrastat_department,
-        "error msg in raise",
-        ['intrastat_department']
-        )]
-
-
 class stock_picking(orm.Model):
     _inherit = "stock.picking"
 
