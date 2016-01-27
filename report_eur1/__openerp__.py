@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    report_eur1 module for Odoo
-#    Copyright (C) 2012-2015 Akretion (www.akretion.com)
+#    report_eur1 module for OpenERP
+#    Copyright (C) 2012-2014 Akretion
 #    @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -23,13 +23,12 @@
 
 {
     'name': 'EUR-1 report',
-    'version': '1.0',
+    'version': '1.1',
     'category': 'Localisation/Report Intrastat',
     'license': 'AGPL-3',
     'summary': 'Adds EUR-1 report on stock picking',
-    'description': """
-This module adds an EUR-1 report on stock picking, that can be directly
-printed on the official EUR-1 form.
+    'description': """This module adds an EUR-1 report on stock picking,
+that can be directly printed on the official EUR-1 form.
 
 This module has been written by Alexis de Lattre
 from Akretion <alexis.delattre@akretion.com>.
@@ -37,10 +36,9 @@ from Akretion <alexis.delattre@akretion.com>.
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
     'depends': [
-        'intrastat_product',
+        'l10n_fr_intrastat_product',
         'report_aeroo',
-        'sale',  # we display some fields that are declared in "sale"
-        ],
+        'sale'],  # we display some fields that are declared in "sale"
     'data': ['report.xml'],
     'installable': True,
 }

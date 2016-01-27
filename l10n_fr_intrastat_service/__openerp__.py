@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Report intrastat service module for OpenERP (DES)
-#    Copyright (C) 2010-2014 Akretion (http://www.akretion.com)
+#    Copyright (C) 2010-2013 Akretion (http://www.akretion.com)
 #    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
 
 {
     'name': 'France Intrastat Service',
-    'version': '1.2',
+    'version': '1.1',
     'category': 'Localisation/Report Intrastat',
     'license': 'AGPL-3',
     'summary': 'Module for Intrastat service reporting (DES) for France',
@@ -46,5 +46,6 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
     ],
     'demo': [],
     'installable': True,
+    'active': False,
     'application': True,
 }

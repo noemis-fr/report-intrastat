@@ -23,7 +23,7 @@
 
 {
     'name': 'France Intrastat Product',
-    'version': '1.2',
+    'version': '1.1',
     'category': 'Localisation/Report Intrastat',
     'license': 'AGPL-3',
     'summary': 'Module for Intrastat product reporting (DEB) for France',
@@ -35,11 +35,10 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
     """,
     'author': 'Akretion',
     'website': 'http://www.akretion.com',
-    'depends': ['intrastat_product', 'sale_stock', 'purchase', 'l10n_fr_siret'],
+    'depends': ['intrastat_base', 'sale_stock', 'purchase'],
     'data': [
         'security/intrastat_product_security.xml',
         'security/ir.model.access.csv',
-        'intrastat_type_data.xml',
         'intrastat_product_view.xml',
         'intrastat_type_view.xml',
         'intrastat_product_reminder.xml',
@@ -51,5 +50,6 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
     ],
     'demo': ['intrastat_demo.xml'],
     'installable': True,
+    'active': False,
     'application': True,
 }

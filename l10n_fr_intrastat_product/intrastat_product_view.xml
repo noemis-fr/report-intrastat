@@ -10,11 +10,11 @@
 <data>
 
 <!-- Form view of DEB, with integrated form+tree view of lines -->
-<record id="l10n_fr_intrastat_product_form" model="ir.ui.view">
-    <field name="name">l10n.fr.intrastat.product.form</field>
-    <field name="model">l10n.fr.report.intrastat.product</field>
+<record id="fr_intrastat_product_form" model="ir.ui.view">
+    <field name="name">fr.intrastat.product.form</field>
+    <field name="model">report.intrastat.product</field>
     <field name="arch" type="xml">
-        <form string="Intrastat Product">
+        <form string="Intrastat Product" version="7.0">
             <header>
                 <button name="done" string="Done" type="object" class="oe_highlight" states="draft" />
                 <button name="back2draft" string="Back to draft" type="object" states="done" />
@@ -49,9 +49,9 @@
                         <!-- START of form view for DEB lines -->
                         <form string="Intrastat product lines">
                             <group col="4" string="Information to declare" colspan="4">
-                                <field name="intrastat_type_id" required="1" domain="[('intrastat_product_type', '=', parent.type)]" />
+                                <field name="intrastat_type_id" required="1" on_change="intrastat_type_on_change(intrastat_type_id, parent.type, parent.obligation_level, context)" domain="[('intrastat_product_type', '=', parent.type)]" />
                                 <field name="procedure_code" />
-                                <field name="intrastat_code_id" attrs="{'readonly': [('is_fiscal_only', '=', True)]}" groups="l10n_fr_intrastat_product.group_detailed_intrastat_product"/>
+                                <field name="intrastat_code_id" on_change="intrastat_code_on_change(intrastat_code_id, context)" attrs="{'readonly': [('is_fiscal_only', '=', True)]}" groups="l10n_fr_intrastat_product.group_detailed_intrastat_product"/>
                                 <field name="intrastat_code" attrs="{'readonly': [('is_fiscal_only', '=', True)]}" groups="l10n_fr_intrastat_product.group_detailed_intrastat_product"/>
                                 <field name="partner_country_id" domain="[('intrastat', '=', True)]" attrs="{'readonly': [('is_fiscal_only', '=', True)]}" groups="l10n_fr_intrastat_product.group_detailed_intrastat_product" /> <!-- I don't know why, but OpenERP doesn't want to display "partner_country_code" in Form view -->
                                 <field name="amount_company_currency" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
@@ -108,17 +108,17 @@
 </record>
 
 <!-- Tree view for DEB -->
-<record id="l10n_fr_intrastat_product_tree" model="ir.ui.view">
-    <field name="name">l10n.fr.intrastat.product.tree</field>
-    <field name="model">l10n.fr.report.intrastat.product</field>
+<record id="fr_intrastat_product_tree" model="ir.ui.view">
+    <field name="name">fr.intrastat.product.tree</field>
+    <field name="model">report.intrastat.product</field>
     <field name="arch" type="xml">
         <tree string="Intrastat Product" colors="blue:state=='draft'">
             <field name="year_month" />
             <field name="type" />
             <field name="obligation_level" />
             <field name="num_lines" />
-            <field name="total_amount" sum="Total Amount" />
-            <field name="total_fiscal_amount" sum="Total Fiscal Amount" />
+            <field name="total_amount" sum="Total amount" />
+            <field name="total_fiscal_amount" sum="Total fiscal amount" />
             <field name="currency_id" />
             <field name="state" />
             <button icon="gtk-ok" name="done" string="Done" type="object" colspan="1" states="draft" />
@@ -128,54 +128,36 @@
 
 
 <!-- Search view for DEB -->
-<record id="l10n_fr_intrastat_product_search" model="ir.ui.view">
-    <field name="name">l10n.fr.intrastat.product.search</field>
-    <field name="model">l10n.fr.report.intrastat.product</field>
+<record id="fr_intrastat_product_search" model="ir.ui.view">
+    <field name="name">fr.intrastat.product.search</field>
+    <field name="model">report.intrastat.product</field>
     <field name="arch" type="xml">
         <search string="Search Intrastat Products">
             <filter name="import" string="Import" domain="[('type', '=', 'import')]" />
             <filter name="export" string="Export" domain="[('type', '=', 'export')]" />
             <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]" />
             <filter name="done" string="Done" domain="[('state', '=', 'done')]" />
-            <group string="Group By" name="group_by">
-               <filter name="date_group_by" string="Date" context="{'group_by': 'start_date'}" />
-               <filter name="type_group_by" string="Type" context="{'group_by': 'type'}" />
-            </group>
         </search>
     </field>
 </record>
 
-<!-- Graph view for DEB -->
-<record id="l10n_fr_intrastat_product_graph" model="ir.ui.view">
-    <field name="name">l10n.fr.intrastat.product.graph</field>
-    <field name="model">l10n.fr.report.intrastat.product</field>
-    <field name="arch" type="xml">
-        <graph string="Intrastat Product" type="bar">
-            <field name="start_date" type="row"/>
-            <field name="type" type="row"/>
-            <field name="total_amount" type="measure"/>
-        </graph>
-    </field>
-</record>
-
 <!-- Action related -->
-<record id="l10n_fr_intrastat_product_tree_action" model="ir.actions.act_window">
+<record id="fr_intrastat_product_tree_action" model="ir.actions.act_window">
     <field name="name">Intrastat Product</field>
-    <field name="res_model">l10n.fr.report.intrastat.product</field>
-    <field name="view_mode">tree,form,graph</field>
+    <field name="res_model">report.intrastat.product</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
 </record>
 
 
 <!-- Intrastat product menu -->
-<menuitem id="l10n_fr_intrastat_product_menu"
-    parent="intrastat_base.menu_intrastat_base_root"
-    action="l10n_fr_intrastat_product_tree_action" />
+<menuitem id="fr_intrastat_product_menu" parent="intrastat_base.menu_intrastat_base_root" action="fr_intrastat_product_tree_action" />
 
 
 <!-- Notification in the chatter -->
-<record id="l10n_fr_declaration_done" model="mail.message.subtype">
+<record id="declaration_done" model="mail.message.subtype">
     <field name="name">Intrastat Product Validated</field>
-    <field name="res_model">l10n.fr.report.intrastat.product</field>
+    <field name="res_model">report.intrastat.product</field>
     <field name="default" eval="False"/>
     <field name="description">Intrastat Product Validated</field>
 </record>

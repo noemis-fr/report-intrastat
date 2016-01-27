@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    L10n FR Report intrastat product module for Odoo
+#    Report intrastat product module for OpenERP
 #    Copyright (C) 2010-2014 Akretion (http://www.akretion.com)
 #    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
@@ -20,21 +20,26 @@
 #
 ##############################################################################
 
-from openerp import models
+from openerp.osv import orm
 
 
-class PurchaseOrder(models.Model):
+class purchase_order(orm.Model):
     _inherit = "purchase.order"
 
-    def _prepare_invoice(self, cr, uid, order, line_ids, context=None):
+    def action_invoice_create(self, cr, uid, ids, context=None):
         '''Copy country of partner_id =("origin country") and '''
         '''arrival department on invoice'''
-        invoice_vals = super(PurchaseOrder, self)._prepare_invoice(
-            cr, uid, order, line_ids, context=context)
-        if order.partner_id.country_id:
-            invoice_vals['intrastat_country_id'] = \
-                order.partner_id.country_id.id
-        if order.picking_ids:
-            invoice_vals['intrastat_department'] = \
-                order.picking_ids[0].intrastat_department
-        return invoice_vals
+        res = super(purchase_order, self).action_invoice_create(
+            cr, uid, ids, context=context)
+        for purchase in self.browse(cr, uid, ids, context=context):
+            for rel_invoice in purchase.invoice_ids:
+                dico_write = {}
+                if purchase.partner_id and purchase.partner_id.country_id:
+                    dico_write['intrastat_country_id'] = \
+                        purchase.partner_id.country_id.id
+                if purchase.picking_ids:
+                    dico_write['intrastat_department'] = \
+                        purchase.picking_ids[0].intrastat_department
+                self.pool['account.invoice'].write(
+                    cr, uid, rel_invoice.id, dico_write, context=context)
+        return res
