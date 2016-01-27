@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright (C) 2010-2014 Akretion (http://www.akretion.com/)
+    @author Alexis de Lattre <alexis.delattre@akretion.com>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+<!-- Add intrastat_id on Product category -->
+<record id="fr_intrastat_product_category_form" model="ir.ui.view">
+    <field name="name">fr.intrastat.product.category.form</field>
+    <field name="model">product.category</field>
+    <field name="inherit_id" ref="product.product_category_form_view"/>
+    <field name="arch" type="xml">
+        <xpath expr="//group[@name='parent']" position="inside">
+            <group name="intrastat" string="Intrastat Properties" colspan="2">
+                <field name="intrastat_id" />
+            </group>
+        </xpath>
+    </field>
+</record>
+
+<record id="view_product_category_intrastat_tree" model="ir.ui.view">
+    <field name="model">product.category</field>
+    <field name="arch" type="xml">
+        <tree string="Product Categories (Intrastat)" editable="bottom">
+            <field name="name" readonly="1"/>
+            <field name="parent_id" readonly="1"/>
+            <field name="intrastat_id"/>
+            <field name="type" readonly="1"/>
+        </tree>
+    </field>
+</record>
+
+<record id="action_product_category_intrastat" model="ir.actions.act_window">
+    <field name="name">Product Categories (Intrastat)</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">product.category</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="view_product_category_intrastat_tree"/>
+</record>
+
+</data>
+</openerp>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright (C) 2011-2013 Akretion (http://www.akretion.com/)
+    @author Alexis de Lattre <alexis.delattre@akretion.com>
+    @author Sylvain LE GAL <https://twitter.com/legalsylvain>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+<menuitem id="menu_res_partner_intrastat"
+    parent="intrastat_base.menu_intrastat_setting_root" sequence="15"
+    action="action_res_partner_intrastat"/>
+
+<menuitem id="menu_product_category_intrastat"
+    parent="intrastat_base.menu_intrastat_setting_root" sequence="30"
+    action="action_product_category_intrastat"/>
+
+<menuitem id="menu_menu_report_intrastat_type"
+    parent="intrastat_base.menu_intrastat_setting_root" sequence="110"
+    action="action_report_intrastat_type"/>
+
+<menuitem id="menu_report_intrastat_code"
+    parent="intrastat_base.menu_intrastat_setting_root" sequence="100"
+    action="action_report_intrastat_code"/>
+
+</data>
+</openerp>

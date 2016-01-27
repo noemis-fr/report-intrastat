@@ -21,5 +21,28 @@
     </field>
 </record>
 
+<record id="view_res_partner_intrastat_tree" model="ir.ui.view">
+    <field name="model">res.partner</field>
+    <field name="arch" type="xml">
+        <tree string="Partners (Intrastat)" editable="bottom">
+            <field name="name" readonly="1"/>
+            <field name="customer" readonly="1"/>
+            <field name="supplier" readonly="1"/>
+            <field name="intrastat_fiscal_representative" />
+            <field name="country_id" required="1"/>
+            <field name="company_id" groups="base.group_multi_company"/>
+        </tree>
+    </field>
+</record>
+
+<record id="action_res_partner_intrastat" model="ir.actions.act_window">
+    <field name="name">Partners (Intrastat)</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="view_res_partner_intrastat_tree"/>
+</record>
+
 </data>
 </openerp>

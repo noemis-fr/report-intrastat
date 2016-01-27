@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright (C) 2010-2014 Akretion (http://www.akretion.com/)
+    @author Alexis de Lattre <alexis.delattre@akretion.com>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+
+<!-- Add the field intrastat_label on product UoM -->
+<record id="fr_intrastat_product_uom_form" model="ir.ui.view">
+    <field name="name">fr.intrastat.product.uom.form</field>
+    <field name="model">product.uom</field>
+    <field name="inherit_id" ref="product.product_uom_form_view" />
+    <field name="arch" type="xml">
+        <data>
+            <field name="category_id" position="after">
+                <field name="intrastat_label" groups="l10n_fr_intrastat_product.group_detailed_intrastat_product"/>
+            </field>
+        </data>
+    </field>
+</record>
+
+</data>
+</openerp>

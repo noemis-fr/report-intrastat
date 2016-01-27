@@ -26,7 +26,7 @@
     </field>
 </record>
 
-<record id="view_product_product_instrastat_tree" model="ir.ui.view">
+<record id="view_product_product_intrastat_tree" model="ir.ui.view">
     <field name="model">product.product</field>
     <field name="arch" type="xml">
         <tree string="Products (Intrastat)" editable="bottom">
@@ -45,7 +45,7 @@
     <field name="res_model">product.product</field>
     <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
-    <field name="view_id" ref="view_product_product_instrastat_tree"/>
+    <field name="view_id" ref="view_product_product_intrastat_tree"/>
 </record>
 
 </data>
